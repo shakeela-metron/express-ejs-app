@@ -10,32 +10,32 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <form action="/update-contact/<%= item._id _%>" method="post">
+                    <form action="/update-contact/<%= contact._id _%>" method="post">
                       <div class="form-group row">
                         <label for="first_name" class="col-md-3 col-form-label">First Name</label>
                         <div class="col-md-9">
-                          <input type="text" value="<%= item.first_name _%>" name="first_name" id="first_name" class="form-control">
+                          <input type="text" value="<%= contact.first_name _%>" name="first_name" id="first_name" class="form-control">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="last_name" class="col-md-3 col-form-label">Last Name</label>
                         <div class="col-md-9">
-                          <input type="text" value="<%= item.last_name _%>" name="last_name" id="last_name" class="form-control">
+                          <input type="text" value="<%= contact.last_name _%>" name="last_name" id="last_name" class="form-control">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="email" class="col-md-3 col-form-label">Email</label>
                         <div class="col-md-9">
-                          <input type="text" value="<%= item.email _%>" name="email" id="email" class="form-control">
+                          <input type="text" value="<%= contact.email _%>" name="email" id="email" class="form-control">
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <label for="phone" class="col-md-3 col-form-label">Phone</label>
                         <div class="col-md-9">
-                          <input type="text" value="<%= item.phone _%>" name="phone" id="phone" class="form-control">
+                          <input type="text" value="<%= contact.phone _%>" name="phone" id="phone" class="form-control">
                         </div>
                       </div>
 
@@ -44,15 +44,15 @@
                         <div class="col-md-9">
                           <div class="row">
                             <div class="col-6">
-                              <input type="text" value="<%= item.address.street _%>" placeholder="street" name="street" id="street" class="form-control">
+                              <input type="text" value="<%= contact.address.street _%>" placeholder="street" name="street" id="street" class="form-control">
                             </div>
                             <div class="col-6">
-                              <input type="text" value="<%= item.address.zipCode _%>" placeholder="zip" name="zipCode" id="zipCode" class="form-control">
+                              <input type="text" value="<%= contact.address.zipCode _%>" placeholder="zip" name="zipCode" id="zipCode" class="form-control">
                             </div>
                           </div>
                           <div class="row mt-3">
                             <div class="col">
-                              <input type="text" value="<%= item.address.city _%>" placeholder="city" name="city" id="city" class="form-control">
+                              <input type="text" value="<%= contact.address.city _%>" placeholder="city" name="city" id="city" class="form-control">
                             </div>
                           </div>
                         </div>

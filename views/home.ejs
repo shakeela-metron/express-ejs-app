@@ -27,18 +27,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% items.forEach((item, index)=>{%>
+                    <% contacts.forEach((contact, index)=>{%>
                       <tr>
                         <td><%= index+1 _%></td>
-                        <td><%= item.first_name _%></td>
-                        <td><%= item.last_name _%></td>
-                        <td><%= item.email _%></td>
-                        <td><%= item.phone _%></td>
-                        <td><%= item.address.street %>, <%= item.address.city %>-<%= item.address.zipCode _%></td>
+                        <td><%= contact.first_name _%></td>
+                        <td><%= contact.last_name _%></td>
+                        <td><%= contact.email _%></td>
+                        <td><%= contact.phone _%></td>
+                        <td><%= contact.address.street %>, <%= contact.address.city %>-<%= contact.address.zipCode _%></td>
                         <td width="150">
-                          <a href="/show-contact/<%= item._id _%>" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
-                          <a href="/update-contact/<%= item._id _%>" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
-                          <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirmDelete('<%= item._id %>')"><i class="fa fa-times"></i></a>
+                          <a href="/show-contact/<%= contact._id _%>" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i class="fa fa-eye"></i></a>
+                          <a href="/update-contact/<%= contact._id _%>" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i class="fa fa-edit"></i></a>
+                          <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete" onclick="confirmDelete('<%= contact._id %>')"><i class="fa fa-times"></i></a>
                         </td>
                       </tr>
                     <% }) %>
