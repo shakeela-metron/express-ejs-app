@@ -1,10 +1,11 @@
+// Database collection schema
 import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
   first_name: { type: String },
   last_name: { type: String },
   email: { type: String },
-  phone: { type: Number },
+  phone: { type: String },
   address: {
     street: { type: String },
     city: { type: String },
