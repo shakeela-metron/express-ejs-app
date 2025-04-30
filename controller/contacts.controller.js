@@ -1,31 +1,56 @@
+import mongoose from "mongoose";
 import Contact from "../models/contacts.models.js";
 
-export const getContacts = async (req, res) => {
+export const getContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find();
-    res.render("home", { title: "All Contacts", contacts });
+    const { page = 1, limit = 4 } = req.query;
+    const options = {
+      page: parseInt(page),
+      limit: parseInt(limit),
+    };
+
+    const result = await Contact.paginate({}, options);
+    res.render("home", {
+      title: "All Contacts",
+      contacts: result.docs,
+      totalDocs: result.totalDocs,
+      limit: result.limit,
+      totalPages: result.totalPages,
+      currentPage: result.page,
+      counter: result.pagingCounter,
+      hasPrevPage: result.hasPrevPage,
+      hasNextPage: result.hasNextPage,
+      prevPage: result.prevPage,
+      nextPage: result.nextPage,
+    });
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };
 
-export const getContact = async (req, res) => {
+export const getContact = async (req, res, next) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.render("404", { message: "Invalid ID" });
+    }
     const contact = await Contact.findById(req.params.id);
+    if (!contact) {
+      res.render("404", { message: "Contact not found." });
+    }
     res.render("show-contact", {
       title: "Contact Details",
       contact,
     });
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };
 
-export const addContactPage = (req, res) => {
+export const addContactPage = (req, res, next) => {
   res.render("add-contact");
 };
 
-export const addContact = async (req, res) => {
+export const addContact = async (req, res, next) => {
   try {
     const { first_name, last_name, email, phone, street, zipCode, city } =
       req.body;
@@ -42,21 +67,27 @@ export const addContact = async (req, res) => {
       res.status(500).send(insertResult);
     }
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };
 
-export const updateContactPage = async (req, res) => {
+export const updateContactPage = async (req, res, next) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.render("404", { message: "Invalid ID" });
+    }
     const contact = await Contact.findById(req.params.id);
     res.render("update-contact", { title: "Update Contact", contact });
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };
 
-export const updateContact = async (req, res) => {
+export const updateContact = async (req, res, next) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.render("404", { message: "Invalid ID" });
+    }
     const { first_name, last_name, email, phone, street, zipCode, city } =
       req.body;
     const updateResult = await Contact.findByIdAndUpdate(req.params.id, {
@@ -72,17 +103,20 @@ export const updateContact = async (req, res) => {
       res.status(500).send(updateResult);
     }
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };
 
-export const deleteContact = async (req, res) => {
+export const deleteContact = async (req, res, next) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.render("404", { message: "Invalid ID" });
+    }
     const contact = await Contact.findByIdAndDelete(req.params.id);
     if (contact.__v === 0) {
       res.redirect("/");
     }
   } catch (error) {
-    res.status(500).send(error);
+    res.render("500", { message: error });
   }
 };

@@ -29,7 +29,7 @@
                   <tbody>
                     <% contacts.forEach((contact, index)=>{%>
                       <tr>
-                        <td><%= index+1 _%></td>
+                        <td><%= counter+index _%></td>
                         <td><%= contact.first_name _%></td>
                         <td><%= contact.last_name _%></td>
                         <td><%= contact.email _%></td>
@@ -44,6 +44,27 @@
                     <% }) %>
                   </tbody>
                 </table> 
+                <nav aria-label="...">
+                  <ul class="pagination justify-content-center">
+                    <% let disabledClass = hasPrevPage ? "":"disabled" %>
+                    <li class="page-item <%= disabledClass %>">
+                      <a class="page-link" href="/?page=<%= prevPage %>">Previous</a>
+                    </li>
+
+                    <%  for(let i=1; i<=totalPages; i++){
+                      let activeClass = currentPage === i ? "active":"";
+                    %>
+                    <li class="page-item <%= activeClass %>">
+                      <a class="page-link" href="/?page=<%= i %>"><%= i %></a>
+                    </li>
+                    <% } %>
+
+                    <% let disabledClassNext = hasNextPage ? "":"disabled" %>
+                    <li class="page-item <%= disabledClassNext %>">
+                      <a class="page-link" href="/?page=<%= nextPage %>">Next</a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>

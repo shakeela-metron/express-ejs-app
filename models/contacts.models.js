@@ -1,5 +1,6 @@
 // Database collection schema
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const contactSchema = new mongoose.Schema({
   first_name: { type: String },
@@ -12,6 +13,8 @@ const contactSchema = new mongoose.Schema({
     zipCode: { type: Number },
   },
 });
+
+contactSchema.plugin(mongoosePaginate);
 
 const Contact = mongoose.model("contacts", contactSchema);
 
